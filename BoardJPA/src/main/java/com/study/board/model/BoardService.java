@@ -24,7 +24,6 @@ public class BoardService {
 	private final BoardRepository boardRepository;
 
 	// 게시글 생성
-	// 생성된 게시글의 글 번호(PK)
 	@Transactional
 	public Long save(final BoardRequestDto Params) {
 		Board entity = boardRepository.save(Params.toEntity());
@@ -36,9 +35,7 @@ public class BoardService {
 	public List<BoardResponseDto> findAll() {
 		Sort sort = Sort.by(Direction.DESC, "id", "createdDate");
 		List<Board> list = boardRepository.findAll(sort);
-		return list.stream()
-				.map(BoardResponseDto::new)
-				.collect(Collectors.toList()); 
+		return list.stream().map(BoardResponseDto::new).collect(Collectors.toList()); 
 				
 	}
 
